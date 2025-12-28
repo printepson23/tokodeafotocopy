@@ -115,10 +115,19 @@ input,select{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px
 
 <script>
 const WA="6285808949204";
-let products = JSON.parse(localStorage.getItem("products"))||[
-  {name:"Pulpen",price:3000},
-  {name:"Buku Tulis",price:5000}
-];
+let products = [];
+
+fetch("products.json")
+  .then(res => res.json())
+  .then(data => {
+    products = data;
+    renderProducts();
+  })
+  .catch(err => {
+    alert("Gagal load produk");
+    console.error(err);
+  });
+
 let user=localStorage.getItem("user");
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 let total=Number(localStorage.getItem("total"))||0;
@@ -150,18 +159,33 @@ function loginUser(){
 }
 
 function renderProducts(){
-  productList.innerHTML="";
-  products.forEach(p=>{
-productList.innerHTML+=`
-  <div class="card row">
-    <div style="flex:1">${p.name}</div>
-    <div style="min-width:90px;text-align:right">Rp${p.price.toLocaleString("id-ID")}
-</div>
-    <button class="green" onclick="addItem('${p.name}',${p.price})">Tambah</button>
-  </div>`;
+  productList.innerHTML = "";
 
+  products.forEach((p, i) => {
+    productList.innerHTML += `
+      <div class="card row">
+        <div style="width:26px;text-align:right;font-weight:bold">
+          ${i + 1}.
+        </div>
+
+        <div style="flex:1">
+          ${p.name}
+        </div>
+
+        <div style="min-width:90px;text-align:right">
+          Rp${p.price.toLocaleString("id-ID")}
+        </div>
+
+        <button class="green"
+          onclick="addItem('${p.name}', ${p.price})">
+          Tambah
+        </button>
+      </div>
+    `;
   });
 }
+
+
 
 function addItem(name,price){
   cart.push({name,price});
@@ -228,7 +252,7 @@ function clearCart(){
 function saveCart(){
   localStorage.setItem("cart",JSON.stringify(cart));
   localStorage.setItem("total",total);
-  localStorage.setItem("products",JSON.stringify(products));
+
 }
 
 /* PRINT STRUK */
@@ -376,6 +400,7 @@ function importCSV(input){
   };
   reader.readAsText(file);
 }
+
 </script>
 
 </body>
