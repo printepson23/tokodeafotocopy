@@ -117,7 +117,7 @@ input,select{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px
 const WA="6285808949204";
 let products = [];
 
-fetch("products.json?v=1")
+fetch("products.json")
   .then(res => res.json())
   .then(data => {
     products = data;
@@ -358,17 +358,19 @@ document.getElementById("judulToko").addEventListener("click",()=>{
   }
 });
 
-function addProduct(){
-  const name=document.getElementById("newProductName").value.trim();
-  const price=Number(document.getElementById("newProductPrice").value);
-  if(!name||!price) return alert("Isi nama & harga");
-  products.push({name,price});
-  saveCart();
-  renderProducts();
-  alert("Produk berhasil ditambahkan");
-  document.getElementById("newProductName").value="";
-  document.getElementById("newProductPrice").value="";
+async function addProduct(){
+  const name = newProductName.value.trim();
+  const price = Number(newProductPrice.value);
+  if(!name || !price) return alert("Lengkapi data");
+
+  await addDoc(collection(db,"products"),{
+    name, price
+  });
+
+  alert("Produk ditambahkan");
+  loadProducts();
 }
+
 
 function closeAdmin(){
   document.getElementById("adminPanel").style.display="none";
@@ -401,6 +403,45 @@ function importCSV(input){
   reader.readAsText(file);
 }
 
+</script>
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyApYGa1HWEzjWFSWXlqZefi6D0TGKtHa7I",
+  authDomain: "dea-fotocopy-6e46b.firebaseapp.com",
+  projectId: "dea-fotocopy-6e46b",
+  storageBucket: "dea-fotocopy-6e46b.firebasestorage.app",
+  messagingSenderId: "497872933662",
+  appId: "1:497872933662:web:e58285619fb3b810f3ef0f",
+  measurementId: "G-0X7TC746W2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const productList = document.getElementById("productList");
+
+async function loadProducts(){
+  productList.innerHTML = "";
+  const querySnapshot = await getDocs(collection(db, "products"));
+  let no = 1;
+  querySnapshot.forEach(doc => {
+    const p = doc.data();
+    productList.innerHTML += `
+      <div class="card row">
+        <div>${no++}. ${p.name}</div>
+        <div style="text-align:right">Rp ${p.price.toLocaleString("id-ID")}</div>
+        <button class="green" onclick="addItem('${p.name}',${p.price})">Tambah</button>
+      </div>
+    `;
+  });
+}
+
+window.loadProducts = loadProducts;
+loadProducts();
 </script>
 
 </body>
