@@ -1,333 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>DEA FOTOCOPY</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-*{box-sizing:border-box}
-body{font-family:Arial,sans-serif;margin:0;background:#f1f5f9;padding-top:300px;}
-header{position:fixed;top:0;left:0;width:100%;background:#0f172a;color:#fff;z-index:1000;}
-.header-inner{max-width:900px;margin:auto;padding:12px;text-align:center;}
-.profile{font-size:12px;color:#cbd5e1;}
-.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px;}
-.menu button{background:#1e293b;color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:12px}
-.menu .wa{background:#25D366}
-.menu .qris{background:#0ea5e9}
-section{max-width:900px;margin:auto;padding:16px;}
-.card{background:#fff;padding:14px;margin-bottom:14px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.1);}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
-button{padding:8px 10px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;}
-.green{background:#22c55e;color:#fff;}
-.red{background:#faf8f8;color:#c20808;}
-input,select{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #cbd5e1;}
-.hidden{display:none;}
-.tab{display:block;}
-#adminPanel{display:none;position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#fff;padding:16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.3);z-index:2000;}
-#adminPanel input,#adminPanel button{margin-top:6px;width:100%;padding:8px;border-radius:6px;border:1px solid #cbd5e1;}
-@media print{@page{size:58mm auto;margin:0}}
-
-</style>
+  <meta charset="UTF-8">
+  <title>Toko Dea Fotocopy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+    .wa {
+      display: block;
+      text-align: center;
+      background: #25D366;
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <div class="header-inner">
-    <h2 id="judulToko">🏪 DEA FOTOCOPY</h2>
-    <div class="profile">
-      ⏰ 06.00–21.00 | 📞 0858-0894-9204<br>
-      ATK • Print • Fotokopi • Scan<br>
-      Jl. Gempol RT.05 RW.06, Menganti – Gresik
-    </div>
-    <p id="userInfo"></p>
-    <nav class="menu">
-      <button onclick="goSection('print')">🖨️ Print</button>
-      <button onclick="goSection('produk')">🛒 Produk</button>
-      <button onclick="goSection('keranjang')">🧾 Keranjang</button>
-      <button class="wa" onclick="orderWA()">💬 WA</button>
-      <button class="qris">💳 QRIS</button>
-    </nav>
-  </div>
+  <h1>TOKO DEA FOTOCOPY</h1>
+  <p>Fotocopy • Print • Scan • ATK</p>
 </header>
 
-<section id="home">
+<div class="container">
   <div class="card">
-    <h3>👤 Pelanggan</h3>
-    <input id="username" placeholder="Nama">
-    <button class="green" onclick="loginUser()">Masuk</button>
+    <h3>📌 Layanan</h3>
+    <ul>
+      <li>Fotocopy Hitam Putih & Warna</li>
+      <li>Print Dokumen</li>
+      <li>Scan</li>
+      <li>Jilid & Laminating</li>
+    </ul>
   </div>
-</section>
 
-<section id="shop" class="hidden">
-
-<!-- TAB PRINT -->
-<div id="tab-print" class="tab">
-<h3 id="print">🖨️ Jasa Print</h3>
-<div class="card">
-  <p style="font-size:12px;color:#475569">
-📎 File akan dikirim melalui WhatsApp setelah klik tombol WA
-</p>
-
-  <select id="printType">
-    <option value="Hitam Putih">Hitam Putih (Rp1000)</option>
-    <option value="Warna">Warna (Rp2000)</option>
-  </select>
-  <input type="number" id="printQty" placeholder="Jumlah lembar">
-  <button class="green" onclick="addPrint()">Tambah</button>
-</div>
-
-<!-- TAB PRODUK -->
-<div id="tab-produk" class="tab hidden">
-  <h3>🛒 Produk ATK</h3>
-  <div id="productList"></div>
-</div>
-
-<!-- TAB KERANJANG -->
-<div id="tab-keranjang" class="tab hidden">
-  <h3>🧾 Keranjang</h3>
-  <div class="card" id="cart"></div>
-  <div class="card row">
-    <b id="total">Total: Rp0</b>
-    <button class="green" onclick="printStruk()">🧾 Cetak Struk</button>
-    <button class="red" onclick="clearCart()">🗑️ Hapus</button>
+  <div class="card">
+    <h3>📍 Alamat</h3>
+    <p>Isi alamat toko kamu di sini</p>
   </div>
+
+  <a class="wa" href="https://wa.me/628XXXXXXXXX" target="_blank">
+    💬 Chat WhatsApp
+  </a>
 </div>
-
-</section>
-
-<!-- ADMIN PANEL TERSEMBUNYI -->
-<div id="adminPanel">
-  <h3>Admin Panel</h3>
-  <input type="password" id="adminPassInput" placeholder="Password Admin">
-  <input type="text" id="newProductName" placeholder="Nama Produk">
-  <input type="number" id="newProductPrice" placeholder="Harga Produk">
-  <button class="green" onclick="addProduct()">Tambah Produk</button>
-  <button class="red" onclick="closeAdmin()">Tutup</button>
-</div>
-
-<script>
-const WA="6285808949204";
-let products = JSON.parse(localStorage.getItem("products"))||[
-  {name:"Pulpen",price:3000},
-  {name:"Buku Tulis",price:5000}
-];
-let user=localStorage.getItem("user");
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
-let total=Number(localStorage.getItem("total"))||0;
-
-const home=document.getElementById("home");
-const shop=document.getElementById("shop");
-const cartDiv=document.getElementById("cart");
-const totalEl=document.getElementById("total");
-const userInfo=document.getElementById("userInfo");
-
-if(user){
-  home.classList.add("hidden");
-  shop.classList.remove("hidden");
-  userInfo.textContent="Halo, "+user;
-  renderProducts();
-  renderCart();
-}
-
-function loginUser(){
-  user=username.value;
-  if(!user) return alert("Isi nama");
-  localStorage.setItem("user",user);
-  home.classList.add("hidden");
-  shop.classList.remove("hidden");
-  userInfo.textContent="Halo, "+user;
-  renderProducts();
-}
-
-function renderProducts(){
-  productList.innerHTML="";
-  products.forEach(p=>{
-    productList.innerHTML+=`
-    <div class="card row">
-      <div>${p.name}</div>
-      <div>Rp${p.price}</div>
-      <button class="green" onclick="addItem('${p.name}',${p.price})">Tambah</button>
-    </div>`;
-  });
-}
-
-function addItem(name,price){
-  cart.push({name,price});
-  total+=price;
-  saveCart();
-  renderCart();
-}
-
-function addPrint(){
-  const q=+printQty.value;
-  const t=printType.value;
-  if(!q) return alert("Isi jumlah lembar");
-  const p=t==="Warna"?2000:1000;
-  cart.push({name:`Print ${t}`,qty:q,price:p});
-  total+=q*p;
-  saveCart();
-  renderCart();
-  alert("Setelah ini silakan kirim FILE via WhatsApp 📎");
-}
-
-function renderCart(){
-  cartDiv.innerHTML="";
-  if(!cart.length){
-    cartDiv.innerHTML="<small>Keranjang kosong</small>";
-    totalEl.textContent="Total: Rp0";
-    return;
-  }
-  cart.forEach((i,idx)=>{
-    const harga=i.qty?i.qty*i.price:i.price;
-    const row=document.createElement("div");
-    row.className="row";
-    row.innerHTML=`
-      <div style="flex:1">${i.name}${i.qty?` (${i.qty})`:""}</div>
-      <div>Rp${harga}</div>
-    `;
-    const b=document.createElement("button");
-    b.textContent="Hpus";
-    b.className="red";
-    b.onclick=()=>removeItem(idx);
-    row.appendChild(b);
-    cartDiv.appendChild(row);
-  });
-  totalEl.textContent="Total: Rp"+total;
-}
-
-function removeItem(i){
-  total-=cart[i].qty?cart[i].qty*cart[i].price:cart[i].price;
-  cart.splice(i,1);
-  saveCart();
-  renderCart();
-}
-
-function clearCart(){
-  if(!confirm("Hapus semua?"))return;
-  cart=[];total=0;
-  localStorage.clear();
-  renderCart();
-}
-
-function saveCart(){
-  localStorage.setItem("cart",JSON.stringify(cart));
-  localStorage.setItem("total",total);
-  localStorage.setItem("products",JSON.stringify(products));
-}
-
-/* PRINT STRUK */
-function printStruk(){
-  if(!cart.length) return alert("Keranjang kosong");
-
-  const judul = document.getElementById("judulToko").innerText;
-
-  let html = `
-  <html>
-  <head>
-    <style>
-      @page{size:58mm auto;margin:0}
-      body{font-family:monospace;font-size:10px;padding:5px;}
-      h2{text-align:center;font-size:12px;margin:4px 0;}
-      .center{text-align:center;}
-      hr{border:none;border-top:1px dashed #000;margin:4px 0;}
-      table{width:100%;}
-      td{vertical-align:top;}
-      .right{text-align:right;}
-    </style>
-  </head>
-  <body>
-    <h2>${judul}</h2>
-    <div class="center">
-      ATK • Print • Fotokopi • Scan<br>
-      Jl. Gempol RT.05 RW.06<br>
-      Menganti – Gresik<br>
-      Telp/WA : 0858-0894-9204
-    </div>
-    <hr>
-    Nama: ${user}<br>
-    ${new Date().toLocaleString("id-ID")}
-    <hr>
-    <table>
-  `;
-
-  cart.forEach(item=>{
-    const harga = item.qty ? item.qty * item.price : item.price;
-    html += `
-      <tr>
-        <td>${item.name}${item.qty ? " ("+item.qty+")" : ""}</td>
-        <td class="right">Rp${harga}</td>
-      </tr>
-    `;
-  });
-
-  html += `
-    </table>
-    <hr>
-    <table>
-      <tr>
-        <td><b>TOTAL</b></td>
-        <td class="right"><b>Rp${total}</b></td>
-      </tr>
-    </table>
-    <hr>
-    <div class="center">Terima kasih 🙏</div>
-  </body>
-  </html>
-  `;
-
-  const w = window.open("", "", "width=300,height=600");
-  w.document.write(html);
-  w.document.close();
-  w.print();
-}
-
-
-/* WA ORDER */
-function orderWA(){
-  if(!cart.length) return alert("Keranjang kosong");
-  let msg=`Halo saya ${user}%0A`;
-  cart.forEach(i=>msg+=`- ${i.name} Rp${i.qty?i.qty*i.price:i.price}%0A`);
-  msg+=`Total Rp${total}%0A📎 Mohon kirim FILE via chat WA`;
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`);
-}
-
-/* TAB SWITCH */
-function goSection(tab){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.add("hidden"));
-  document.getElementById("tab-"+tab).classList.remove("hidden");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-/* ADMIN TERSEMBUNYI */
-let adminClicks=0;
-const adminPassword="1234"; // ganti sesuai keinginan
-document.getElementById("judulToko").addEventListener("click",()=>{
-  adminClicks++;
-  if(adminClicks>=5){
-    const pass=prompt("Masukkan password admin");
-    if(pass===adminPassword){
-      document.getElementById("adminPanel").style.display="block";
-    }else alert("Password salah!");
-    adminClicks=0;
-  }
-});
-
-function addProduct(){
-  const name=document.getElementById("newProductName").value.trim();
-  const price=Number(document.getElementById("newProductPrice").value);
-  if(!name||!price) return alert("Isi nama & harga");
-  products.push({name,price});
-  saveCart();
-  renderProducts();
-  alert("Produk berhasil ditambahkan");
-  document.getElementById("newProductName").value="";
-  document.getElementById("newProductPrice").value="";
-}
-
-function closeAdmin(){
-  document.getElementById("adminPanel").style.display="none";
-}
-</script>
 
 </body>
 </html>
