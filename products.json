@@ -1,1 +1,4 @@
-
+[
+  { "name": "Pulpen", "price": 3000 },
+  { "name": "Buku Tulis", "price": 5000 }
+]
